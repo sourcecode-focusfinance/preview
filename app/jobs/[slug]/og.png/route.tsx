@@ -1,9 +1,5 @@
 import { ImageResponse } from "next/og";
-import {
-  formatEmploymentType,
-  getJobPostingBySlug,
-  getOpenJobPostings,
-} from "@/lib/jobPostings";
+import { getJobPostingBySlug, getOpenJobPostings } from "@/lib/jobPostings";
 import { loadGoogleFont } from "@/lib/loadGoogleFont";
 import { getLogoDataUri } from "@/lib/logoDataUri";
 
@@ -32,7 +28,7 @@ const icons = {
       <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
     </svg>
   ),
-  employmentType: (color: string) => (
+  languages: (color: string) => (
     <svg
       width="30"
       height="30"
@@ -44,7 +40,9 @@ const icons = {
       strokeLinejoin="round"
     >
       <circle cx="12" cy="12" r="10" />
-      <path d="M12 6v6l4 2" />
+      <path d="M2 12h20" />
+      <path d="M12 2a15 15 0 0 1 0 20" />
+      <path d="M12 2a15 15 0 0 0 0 20" />
     </svg>
   ),
   location: (color: string) => (
@@ -80,9 +78,9 @@ export async function GET(
           value: job.department ?? "FOCUS Finance",
         },
         {
-          key: "employmentType" as const,
-          label: "Employment",
-          value: formatEmploymentType(job.employmentType),
+          key: "languages" as const,
+          label: "Languages",
+          value: "English & French",
         },
         {
           key: "location" as const,
@@ -143,6 +141,24 @@ export async function GET(
             }}
           >
             We&apos;re hiring
+          </div>
+        </div>
+
+        <div style={{ position: "absolute", top: 56, right: 64, display: "flex" }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 14,
+              background: GREEN,
+              color: "#fff",
+              fontWeight: 800,
+              fontSize: 26,
+              padding: "24px 44px",
+              borderRadius: 999,
+            }}
+          >
+            Apply now →
           </div>
         </div>
 
