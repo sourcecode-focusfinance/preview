@@ -1,5 +1,9 @@
 import { ImageResponse } from "next/og";
-import { getJobPostingBySlug, getOpenJobPostings } from "@/lib/jobPostings";
+import {
+  formatEmploymentType,
+  getJobPostingBySlug,
+  getOpenJobPostings,
+} from "@/lib/jobPostings";
 import { loadGoogleFont } from "@/lib/loadGoogleFont";
 import { getLogoDataUri } from "@/lib/logoDataUri";
 
@@ -13,7 +17,7 @@ const GREEN = "#1b8a3e";
 const GRAY = "#7c8c92";
 
 const icons = {
-  department: (color: string) => (
+  employmentType: (color: string) => (
     <svg
       width="30"
       height="30"
@@ -24,8 +28,8 @@ const icons = {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <rect x="2" y="7" width="20" height="14" rx="2" />
-      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+      <circle cx="12" cy="12" r="10" />
+      <path d="M12 6v6l4 2" />
     </svg>
   ),
   languages: (color: string) => (
@@ -73,9 +77,9 @@ export async function GET(
   const chips = job
     ? [
         {
-          key: "department" as const,
-          label: "Department",
-          value: job.department ?? "FOCUS Finance",
+          key: "employmentType" as const,
+          label: "Employment Type",
+          value: formatEmploymentType(job.employmentType),
         },
         {
           key: "languages" as const,

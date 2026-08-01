@@ -78,6 +78,14 @@ export async function getJobPostingBySlug(
   return jobs.find((job) => job.slug === slug);
 }
 
+export function formatEmploymentType(employmentType: string): string {
+  return employmentType
+    .toLowerCase()
+    .split("_")
+    .map((word) => word[0]?.toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
 export function summarize(text: string, maxLength = 160): string {
   const collapsed = text.replace(/\s+/g, " ").trim();
   if (collapsed.length <= maxLength) return collapsed;
