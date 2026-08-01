@@ -36,6 +36,11 @@ Open [http://localhost:3000](http://localhost:3000).
 pnpm build
 ```
 
-Set `NEXT_PUBLIC_SITE_URL` (e.g. `https://focusfinance.bi`) in the deploy
-environment so absolute URLs (like the logo used inside the generated OG
-images, and `metadataBase`) resolve correctly in production.
+`output: "export"` in `next.config.ts` makes this a fully static build —
+output goes to `out/`. It's plain HTML + PNG files: open `out/index.html`
+directly (works offline via `file://`) or upload the folder to any static
+host, no Node server required.
+
+Set `NEXT_PUBLIC_SITE_URL` (e.g. `https://focusfinance.bi`) in the build
+environment so absolute URLs (like `og:image`, and `metadataBase`) resolve
+correctly in production.
